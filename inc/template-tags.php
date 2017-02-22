@@ -104,6 +104,13 @@ function pure_entry_meta() {
             $time_string
         );
     }
+    //显示阅读量
+    if ( 'post' == get_post_type() ) {
+        printf('<span class="view-counts"><a class="url fn n" href="%1$s">%2$s</a></span>',
+            esc_url( get_permalink() ),
+            getPostViews(get_the_ID())
+        );
+    }
 
     if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
         echo '<span class="comments-link"><i class="fa fa-comment-o"></i>';

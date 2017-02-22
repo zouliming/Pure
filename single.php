@@ -17,7 +17,8 @@ get_header(); ?>
 		<?php
 		// Start the loop.
 		while ( have_posts() ) : the_post();
-
+            //添加文章阅读次数
+            setPostViews(get_the_ID());
 			/*
 			 * Include the post format-specific template for the content. If you want to
 			 * use this in a child theme, then include a file called called content-___.php

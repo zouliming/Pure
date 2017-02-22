@@ -192,3 +192,26 @@ require get_template_directory() . '/inc/template-tags.php';
  * @since Pure 1.0
  */
 require get_template_directory() . '/inc/customizer.php';
+//添加文章阅读次数
+function getPostViews($postID){
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+        return "阅读量：0";
+    }
+    return '阅读量：'.$count;
+}   
+function setPostViews($postID) {
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        $count = 0;
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+    }else{
+        $count++;
+        update_post_meta($postID, $count_key, $count);
+    }
+}
